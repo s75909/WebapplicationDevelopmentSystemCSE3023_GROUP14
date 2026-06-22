@@ -1,0 +1,29 @@
+Payment role-based update
+=========================
+
+Updated flow:
+1. Parent login now stores session attributes:
+   - role = parent
+   - parentId
+   - parentName
+
+2. payment.jsp is parent-only.
+   - Child dropdown is loaded from students table using current parent's parentId.
+   - If parent has more than one child, all linked children appear in dropdown.
+   - Parent cannot submit payment for a child not linked to their account.
+
+3. myPayments.jsp is parent-only.
+   - Shows payment history only for the logged-in parent's children.
+   - Removed hardcoded parentName = "Saidah".
+
+4. paymentHistory.jsp and paymentVerification.jsp are manager/admin-only.
+   - Admin can view all payments.
+   - Admin can approve/reject pending payments.
+
+5. header.jsp now shows different menu by role.
+   - Parent: Make Payment, My Payment History, Register Child
+   - Manager: Admin Dashboard, Payment Dashboard, Verify Payment, etc.
+
+No DBConnection.java was added.
+Database used: existing direct JDBC style in DAO files.
+Important: This uses the existing payment table columns and does not require a new parent_id column in payment.

@@ -1,0 +1,13 @@
+LCMS Integrated Final - Patch Notes
+
+- Removed com/lcms/util/DBConnection.java as requested.
+- DAO files now use direct JDBC connection style, matching the original project approach.
+- Database target is jdbc:mysql://localhost:3306/learn4life using root/admin.
+- Patched classRoomDAO to use the uploaded phpMyAdmin database structure:
+  - classrooms table, not classes
+  - lead_teacher column, not teacher
+  - student assignment updates students.class_name because uploaded DB has no classroom_id column
+- Patched AttendanceDAO class count to use classrooms table.
+- Patched InstructorDAO to read teachers table because uploaded learn4life database has teachers, not instructors.
+
+If your local MySQL root password is empty, change DB_PASS from "admin" to "" inside the DAO files.
